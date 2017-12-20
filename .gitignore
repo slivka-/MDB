@@ -25,11 +25,25 @@
 hs_err_pid*
 
 ### NetBeans ###
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
+MDB/nbproject/private/
+MDB/build/
+MDB/nbbuild/
+MDB/dist/
+MDB/nbdist/
+MDB/.nb-gradle/
+
+SimpleReciever/nbproject/private/
+SimpleReciever/build/
+SimpleReciever/nbbuild/
+SimpleReciever/dist/
+SimpleReciever/nbdist/
+SimpleReciever/.nb-gradle/
+
+SimpleAppClient/nbproject/private/
+SimpleAppClient/build/
+SimpleAppClient/nbbuild/
+SimpleAppClient/dist/
+SimpleAppClient/nbdist/
+SimpleAppClient/.nb-gradle/
 
 # End of https://www.gitignore.io/api/java,netbeans
