@@ -46,4 +46,11 @@ SimpleAppClient/dist/
 SimpleAppClient/nbdist/
 SimpleAppClient/.nb-gradle/
 
+mdb-project/nbproject/private/
+mdb-project/build/
+mdb-project/nbbuild/
+mdb-project/dist/
+mdb-project/nbdist/
+mdb-project/.nb-gradle/
+
 # End of https://www.gitignore.io/api/java,netbeans
