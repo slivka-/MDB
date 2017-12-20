@@ -31,6 +31,7 @@ public class Main
         add("inc/50");
         add("dec/h");
         add("dec/20");
+        add("dec/20/asdasdasd/sadasdas/asdasd");
         add("val");
         add("err");
         add("stop");
