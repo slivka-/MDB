@@ -11,7 +11,6 @@ import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.jms.Topic;
-import javax.jms.TopicPublisher;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -37,10 +36,10 @@ public class MdbBean implements MessageListener
     {      
         try
         {
-            if(message instanceof TextMessage)
+            if (message instanceof TextMessage)
             {
                 String msg = ((TextMessage)message).getText();
-                switch(msg)
+                switch (msg)
                 {
                     case "start":
                         DATA_VAULT.startCounting();
@@ -126,7 +125,7 @@ class DataVault
             
             this.sessionId = dbManager.sessionId(ALBUM);
         }
-        catch(NamingException ex)
+        catch (NamingException ex)
         {
             LOGGER.log(Level.SEVERE, ex.toString());
             this.sessionId = null;
@@ -135,7 +134,7 @@ class DataVault
     
     public void startCounting()
     {
-        if(this.sessionId != null && this.state == BeanState.STANDBY)
+        if (this.sessionId != null && this.state == BeanState.STANDBY)
             this.state = BeanState.COUNTING;
         else
             this.error++;
@@ -143,7 +142,7 @@ class DataVault
     
     public void stopCounting()
     {
-        if(this.state == BeanState.COUNTING)
+        if (this.state == BeanState.COUNTING)
             this.state = BeanState.STANDBY;
         else
             this.error++;
@@ -188,6 +187,7 @@ class DataVault
                     this.error++;
                 break;
             default:
+                LOGGER.log(Level.INFO, "Recieved malformed message: {0}", message);
                 this.error++;
                 break;
         }
@@ -195,22 +195,23 @@ class DataVault
     
     public void counterValue()
     {
-        if(sessionId != null)
+        if (sessionId != null)
         {
-            try(Connection conn = connFactory.createConnection())
+            try (Connection conn = connFactory.createConnection())
             {
-                try(Session s = conn.createSession())
+                try (Session s = conn.createSession())
                 {
-                    try(MessageProducer prod = s.createProducer(myTopic))
+                    try (MessageProducer prod = s.createProducer(myTopic))
                     {
                         String content;
                         content = String.format("%s/%d", sessionId,counter);
                         Message m = s.createTextMessage(content);
                         prod.send(m);
+                        LOGGER.log(Level.INFO, "Sent to topic: {0}", content);
                     }
                 }
             }
-            catch(JMSException ex)
+            catch (JMSException ex)
             {
                 LOGGER.log(Level.SEVERE, ex.toString());
             }
@@ -223,11 +224,11 @@ class DataVault
     
     public void errorValue()
     {
-        if(sessionId != null)
+        if (sessionId != null)
         {
-            try(Connection conn = connFactory.createConnection())
+            try (Connection conn = connFactory.createConnection())
             {
-                try(Session s = conn.createSession())
+                try (Session s = conn.createSession())
                 {
                     try(MessageProducer prod = s.createProducer(myTopic))
                     {
@@ -235,10 +236,11 @@ class DataVault
                         content = String.format("%s/%d", sessionId,error);
                         Message m = s.createTextMessage(content);
                         prod.send(m);
+                        LOGGER.log(Level.INFO, "Sent to topic: {0}", content);
                     }
                 }
             }
-            catch(JMSException ex)
+            catch (JMSException ex)
             {
                 LOGGER.log(Level.SEVERE, ex.toString());
             }
