@@ -39,12 +39,12 @@ SimpleReciever/dist/
 SimpleReciever/nbdist/
 SimpleReciever/.nb-gradle/
 
-SimpleAppClient/nbproject/private/
-SimpleAppClient/build/
-SimpleAppClient/nbbuild/
-SimpleAppClient/dist/
-SimpleAppClient/nbdist/
-SimpleAppClient/.nb-gradle/
+SimpleSender/nbproject/private/
+SimpleSender/build/
+SimpleSender/nbbuild/
+SimpleSender/dist/
+SimpleSender/nbdist/
+SimpleSender/.nb-gradle/
 
 mdb-project/nbproject/private/
 mdb-project/build/
@@ -54,3 +54,4 @@ mdb-project/nbdist/
 mdb-project/.nb-gradle/
 
 # End of https://www.gitignore.io/api/java,netbeans
+/SimpleSender/nbproject/private/
